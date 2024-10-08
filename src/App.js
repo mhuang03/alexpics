@@ -26,17 +26,20 @@ require
   });
 
 // load videos from public/video
-// require.context('../public/vid', true, /.*/).keys().forEach((item, index) => {
-//   slides.push({
-//     type: "video",
-//     sources: [
-//       {
-//         src: "vid" + item.substring(1),
-//         type: "video/" + item.substring(item.lastIndexOf(".") + 1)
-//       }
-//     ]
-//   })
-// });
+require
+  .context("../public/vid", true, /.*/)
+  .keys()
+  .forEach((item, index) => {
+    slides.push({
+      type: "video",
+      sources: [
+        {
+          src: "vid" + item.substring(1),
+          type: "video/" + item.substring(item.lastIndexOf(".") + 1),
+        },
+      ],
+    });
+  });
 
 shuffleArray(slides);
 
