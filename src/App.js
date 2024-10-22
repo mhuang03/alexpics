@@ -55,7 +55,7 @@ const App = () => {
         }}
         video={{
           autoPlay: true,
-          controls: false,
+          controls: true,
           loop: true,
           muted: false,
           preload: "auto",
