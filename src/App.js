@@ -1,7 +1,7 @@
 import * as React from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import { Inline, Zoom, Video } from "yet-another-react-lightbox/plugins";
+import { Inline, Zoom, Video, Share, Download } from "yet-another-react-lightbox/plugins";
 
 function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {
@@ -18,10 +18,12 @@ let slides = [];
 require
   .context("../public/img", true, /.*/)
   .keys()
-  .forEach((item, index) => {
+  .forEach((item) => {
+    let filename = item.substring(2);
     slides.push({
-      src: "img" + item.substring(1),
-      alt: "Image " + index,
+      type: "image",
+      src: "img/" + filename,
+      alt: filename,
     });
   });
 
@@ -29,12 +31,13 @@ require
 require
   .context("../public/vid", true, /.*/)
   .keys()
-  .forEach((item, index) => {
+  .forEach((item) => {
+    let filename = item.substring(2);
     slides.push({
       type: "video",
       sources: [
         {
-          src: "vid" + item.substring(1),
+          src: "vid/" + filename,
           type: "video/" + item.substring(item.lastIndexOf(".") + 1),
         },
       ],
@@ -48,7 +51,7 @@ const App = () => {
     <div style={{ width: "100vw", height: "100vh" }}>
       <Lightbox
         slides={slides}
-        plugins={[Inline, Zoom, Video]}
+        plugins={[Inline, Video, Share, Download, Zoom]}
         zoom={{
           maxZoomPixelRatio: 10,
           scrollToZoom: true,
